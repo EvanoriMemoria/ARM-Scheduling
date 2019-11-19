@@ -1,5 +1,11 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 
 %Information to be included in the title page:
 \title{Scheduling on an Asymmetric Multicore System}
@@ -37,5 +43,32 @@
 	
 	\begin{frame}
 		\frametitle{WASH Scheduler}
+		\begin{algorithm}[H]
+		\caption{WASH}\label{euclid}
+		\begin{algorithmic}
+			\Function{WASH}{$T_A,T_V,C_B,C_S,t$}
+				\State $T_A$: Set of application threads
+				\State $T_V$: Set of VM service threads, $T_A \cap T_V = \emptyset$
+				\State $C_B$: Set of big cores
+				\State $C_S$: Set of small cores, $C_B \cap C_S = \emptyset$
+				\State $t$: Thread to schedule where $t \in T_A \cup T_V$
+				\If{$|T_A| \leq |C_B|$}
+					\If{$t \in T_A$}{ Set Affinity of t to $C_B$ }
+					\Else{ Set Affinity of $t$ to $C_B \cup C_S$}
+					\EndIf
+				\ElsIf{$t \in T_A$}
+					\If{$\forall \tau \in T_A (\text{Lock\%}(\tau) \le \text{Lock}_{\text{Thresh}})$}
+						\State Set Affinity of $t$ to $C_B \cup C_S$
+					\EndIf
+				\EndIf
+			\EndFunction
+		\end{algorithmic}
+		\end{algorithm}
+		Psudocode from \cite{Jibaja:2016:PPA:2854038.2854047}
+	\end{frame}
+	
+	\begin{frame}
+		\bibliography{bibliography}{}
+		\bibliographystyle{plain}
 	\end{frame}
 \end{document}
