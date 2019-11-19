@@ -12,24 +12,27 @@ These are the three parts:
 \end{enumerate}
 
 \subsubsection{CFS}
-The linux Completely Fair Scheduler is very good at optimizing throughput by throwing processes onto open cores. However, by default it does not have any knowledge of energy usage or efficiency. When implementing Energy Aware Scheduling CFS is given the ability to access and read the power usage values of every process.
+The linux Completely Fair Scheduler is very good at optimizing throughput by throwing processes onto open cores. However, by default it does not have any knowledge of energy usage or efficiency. When implementing Energy Aware Scheduling CFS is given the ability to access and read the power usage values of every process.\cite{EAS2015}
 
 \subsubsection{cpu-idle}
-The cpuidle subsystem of the CFS attempts to use heuristics to save energy by putting the processor into an idle state without affecting performance. The cpuidle system has absolutely no control over the processes that are put onto specific cores and is only capable of reacting to what the CFS throws at it.
+The cpuidle subsystem of the CFS attempts to use heuristics to save energy by putting the processor into an idle state without affecting performance. The cpuidle system has absolutely no control over the processes that are put onto specific cores and is only capable of reacting to what the CFS throws at it. \cite{EAS2015}
 
 \subsubsection{cpu-freq}
-The cpufreq (cpu frequency) subsystem also uses heuristics to throttle up or down the frequency of a core in order to save on power - again without affecting performance. This system is also entirely separate from the CFS \textit{and} cpuidle.
+The cpufreq (cpu frequency) subsystem also uses heuristics to throttle up or down the frequency of a core in order to save on power - again without affecting performance. This system is also entirely separate from the CFS \textit{and} cpuidle. \cite{EAS2015}
 
-The first issue we see with this system is that the bottom two subsystems (cpuidle and cpufreq) are both reactive to what the CFS does, and since the CFS is entirely unaware of power management it frequently breaks their predictions and results in both power efficiency loss and speed loss. In addition, the fact that they are reactive means they have to be run frequently themselves in order to keep up with what is happening in the processor in real time.
+The first issue we see with this system is that the bottom two subsystems (cpuidle and cpufreq) are both reactive to what the CFS does, and since the CFS is entirely unaware of power management it frequently breaks their predictions and results in both power efficiency loss and speed loss. In addition, the fact that they are reactive means they have to be run frequently themselves in order to keep up with what is happening in the processor in real time. \cite{EAS2015}
 
 \subsection{Current Asymmetric Multicore Process Scheduling Implementation}
-The current ARM implementation is known as Energy Aware Scheduling or EAS. As the name implies, it takes into account the energy usage of each process and allocates the process to a core for the duration of the process. It should also be noted that EAS for Linux is being developed jointly by Arm and Linaro, it still has much room for improvement.
+The current ARM implementation is known as Energy Aware Scheduling or EAS. As the name implies, it takes into account the energy usage of each process and allocates the process to a core for the duration of the process. It should also be noted that EAS for Linux is being developed jointly by Arm and Linaro, it still has much room for improvement.\cite{EASp2015}
 
 \subsubsection{Energy Aware CFS}
-Under EAS the Completely Fair Scheduler has undergone many changes, it still performs the same function and prioritizes throughput, but now takes into consideration both idle state and frequency. 
+Under EAS the Completely Fair Scheduler has undergone many changes, it still performs the same function and prioritizes throughput, but now takes into consideration both idle state and frequency. \cite{EASp2015}
 
 \subsubsection{sched-idle}
-The new system makes the scheduler aware of the idle states of every core and cluster. It prioritizes placing new processes onto the core with the shallowest idle state - that is to say - the one using the most power while idle. In so doing we lose less power savings than waking up one of the other cores which is more deeply in the idle state, and it responds more quickly as well. Therefore being both faster and more energy efficient.
+The new system makes the scheduler aware of the idle states of every core and cluster. It prioritizes placing new processes onto the core with the shallowest idle state - that is to say - the one using the most power while idle. In so doing we lose less power savings than waking up one of the other cores which is more deeply in the idle state, and it responds more quickly as well. Therefore being both faster and more energy efficient. \cite{EASp2015}
 
 \subsubsection{sched-freq}
-Mainline linux kernel is capable of storing information about processes and their load times. CPU Operating Performance Points then change almost immediatly to accomodate the new process.
+Mainline linux kernel is capable of storing information about processes and their load times. CPU Operating Performance Points then change almost immediatly to accomodate the new process. \cite{EASp2015}
+
+\subsection{Impacts}
+It is clear that taking energy into account when scheduling is a vast improvement over blind scheduling, however, there are still issues that can arise from this scheduling process. Namely, the EAS works very well when the cpu load is interspersed, but when the load is frequently capped, and all cores are running at full capacity, I expect the scheduler will be unable to act on its priorities and begin acting as a completely fair scheduler.
