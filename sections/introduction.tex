@@ -30,3 +30,6 @@ Under EAS the Completely Fair Scheduler has undergone many changes, it still per
 
 \subsubsection{sched-idle}
 The new system makes the scheduler aware of the idle states of every core and cluster. It prioritizes placing new processes onto the core with the shallowest idle state - that is to say - the one using the most power while idle. In so doing we lose less power savings than waking up one of the other cores which is more deeply in the idle state, and it responds more quickly as well. Therefore being both faster and more energy efficient.
+
+\subsubsection{sched-freq}
+Mainline linux kernel is capable of storing information about processes and their load times. CPU Operating Performance Points then change almost immediatly to accomodate the new process.
