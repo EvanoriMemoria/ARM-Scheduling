@@ -1,3 +1,9 @@
 \section{Optimization Targets}
 \subsection{Power vs. Performance}
-The two main targets to be considered when determining a scheduling policy are power and performance. There can be two extremes regarding these targets: 100\% performance and 0\% power efficiency, or 0\% performance and 100\% power efficiency. Ideally, the scheduling policy should lie somewhere in the middle between these two extremes.\cite{AAP2013}
+The two main targets to be considered when determining a scheduling policy are power and performance. There can be two extremes regarding these targets: 100\% performance and 0\% power efficiency, or 0\% performance and 100\% power efficiency. If a scheduling policy is executing to achieve maximum power efficiency, tasks will execute sequentially on the most power-efficient core. This policy will result in taking the most amount of time. If a scheduling policy is executing to achieve maximum performance, tasks will get allocated on the fastest core first with other tasks placed on the slower cores if possible. This is the fastest policy, but will also utilize the most power. \cite{AAP2013}
+
+Ideally, the scheduling policy should lie somewhere in the middle between these two extremes. \cite{AAP2013} This can be observed in the figure below. Note that power is measured in bogowatts and time is measured in seconds.
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{images/power_vs_performance.jpg}
+	\caption{Power vs. Performance \cite{AAP2013}}
+\end{figure}
