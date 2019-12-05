@@ -6,12 +6,18 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
+\usetheme{Frankfurt}
+\usecolortheme{seahorse}
+
+\makeatletter
+\algrenewcommand\ALG@beginalgorithmic{\footnotesize}
+\makeatother
 
 %Information to be included in the title page:
 \title{Scheduling on an Asymmetric Multicore System}
 \author{Ren Wall, Nic Rust, Gavin Austin}
 \institute{}
-\date{22 Nov 2019}
+\date{12 Dec 2019}
 
 \begin{document}
 	\frame{\titlepage}
@@ -48,15 +54,15 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{WASH Improvements over EAS}
-	\end{frame}
-	
-	\begin{frame}
-		\frametitle{Other metrics to schedule on.}
+		\frametitle{WASH Compared to EAS}
+		Wash always schedules on highest power core.\\
+		Thread priorities arranged by most contended held locks.\\
+		Most waited on thread is placed on fastest core.\\
 	\end{frame}
 	
 	\begin{frame}
 		\frametitle{WASH Scheduler}
+		\vspace*{-4mm}
 		\begin{algorithm}[H]
 		\caption{WASH}\label{euclid}
 		\begin{algorithmic}
@@ -78,11 +84,12 @@
 			\EndFunction
 		\end{algorithmic}
 		\end{algorithm}
+		\vspace*{-2mm}
 		Psudocode from \cite{Jibaja:2016:PPA:2854038.2854047}
 	\end{frame}
 	
 	\begin{frame}
+		\bibliographystyle{amsalpha}
 		\bibliography{bibliography}{}
-		\bibliographystyle{plain}
 	\end{frame}
 \end{document}
