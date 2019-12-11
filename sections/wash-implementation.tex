@@ -1,1 +1,11 @@
-\section{WASH Implementation}
+\section{WASH}
+While the schedulers we have examined already certainly have large improvements over existing schedulers, we could certainly do better.
+On asymmetric processors a lot of assumptions that are made about how we schedule multithreaded programs are broken.
+In particular we can look at the threads of a single program and find threads which have a higher priority to finish quickly and actually do something about them finishing more quickly.
+The WASH scheduler keeps track of how many other threads are waiting on each thread to release its locks.
+
+\subsection{Implementation}
+WASH is implemented as an extension to the JikesVM Java Virtual Machine.
+This allows the scheduler much further insight into the operation of each thread than a kernal space scheduler has.
+The drawback of this implementation is that WASH can only set the core priorities of each virtual machine thread, it cannot influence the threads of other processes on the system.
+If the application that WASH is scheduling is the primary load on the system this is not an issue, but it shows the difficulty in generalizing this solution.
