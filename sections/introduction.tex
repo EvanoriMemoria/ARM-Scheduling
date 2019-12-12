@@ -1,3 +1,8 @@
 \section{Introduction}
 \subsection{Why We Chose Asymmetric Multicore Processors}
-ARM processors and other asymmetric multicore processors are beginning to become more popular as technologies advance and we see the benefits of having multiple sizes of cores. Current implementations are extremely focused on power management, leaving significant room for improvements in speed and throughput in general.
+Asymmetric multiprocessors, that is CPUs with multiple cores of different power or capability, are becoming popular in many mobile devices with the continued development of ARM big.LITTLE.
+It can even be argued that modern high end desktop and server oriented processors with many cores fit this definition since often one or a small subset of the cores run at a higher clock speed than the rest. 
+Current implementations of asymmetric aware scheduling are extremely focused on power management and targeted at mobile devices.
+
+We wanted to better understand the existing scheduling algorithms for these processors as well as where asymmetric aware scheduling could go in the future.
+Since both types of processor despite having very different target applications share the same inherent tradeoffs with regards to scheduling we can learn about both by examining where these algroithms lie on the tradeoff space.
