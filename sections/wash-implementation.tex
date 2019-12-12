@@ -10,7 +10,7 @@ This allows the scheduler much further insight into the operation of each thread
 The drawback of this implementation is that WASH can only set the core priorities of each virtual machine thread, it cannot influence the threads of other processes on the system.
 If the application that WASH is scheduling is the primary load on the system this is not an issue, but it shows the difficulty in generalizing this solution \cite{Jibaja:2016:PPA:2854038.2854047}.
 
-\subsection{Psudocode}
+\subsubsection{Psudocode}
 
 \begin{algorithm}[H]
 \caption{WASH}\label{euclid}
