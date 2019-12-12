@@ -34,3 +34,12 @@ If the application that WASH is scheduling is the primary load on the system thi
 \end{algorithmic}
 \end{algorithm}
 \cite{Jibaja:2016:PPA:2854038.2854047}
+\subsection{Performance}
+WASH is not unique in it's maximal utilization of the most powerful core, where it gains its performance advantages is being able to keep more threads running on the less powerful cores at the same time.
+As can be seen in figure \ref{fig:WASH_benchmarks}; WASH not only has better completion time than competing schedulers, but also better total energy usage.
+This is a result of it's more effective utilization of all the cores, not just the high power cores. 
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{images/WASH_benchmarks.jpg}
+	\caption{WASH compared to two other schedulers, default CFS (Oblivious), and helper threads manually bound to low power cores (bindVM), on three hardware configurations, 1B5S  (1Big core and 5 Small cores), 2B4S and 3B3S\cite{Jibaja:2016:PPA:2854038.2854047}.}
+	\label{fig:WASH_benchmarks}
+\end{figure}
